@@ -5,17 +5,132 @@
 </head>
 <body>
 	<script type="text/javascript">
+		// ****************************************************
 		// 闭包
-		function foo() {
-			var a = 2;
+		
+		var MyModules = (function Manager() {
+			var modules = {};
 
-			function bar() {
-				console.log(a)
+			function define(name, deps, impl) {
+				for (var i = 0; i < deps.length; i ++) {
+					deps[i] = modules[deps[i]];
+				}
+				modules[name] = impl.apply(impl, deps); // 将依赖传过去
 			}
 
-			return bar;
-		}
-		var baz = foo(); // 闭包
+			function get(name) {
+				return modules[name]
+			}
+
+			return {
+				define: define,
+				get: get
+			}
+		})();
+
+		MyModules.define('bar', [], function() {
+			function hello(who) {
+				return 'Let me interoduce: ' + who;
+			}
+
+			return {
+				hello: hello
+			}
+		})
+
+		MyModules.define('foo', ['bar'], function(bar) {
+			var hungry = 'hippo';
+
+			function awesome() {
+				console.log(bar.hello(hungry).toUpperCase())
+			}
+
+			return {
+				awesome: awesome
+			}
+		})
+
+		var bar = MyModules.get('bar')
+		var foo = MyModules.get('foo')
+
+		console.log(bar.hello('hippo'))
+
+		foo.awesome();
+
+
+		// var foo = (function CoolModule(id) {
+		// 	function change() {
+		// 		publicAPI.identify = identify2;
+		// 	}
+
+		// 	function identify1() {
+		// 		console.log(id)
+		// 	}
+
+		// 	function identify2() {
+		// 		console.log(id.toUpperCase())
+		// 	}
+
+		// 	var publicAPI = {
+		// 		identify: identify1,
+		// 		change: change
+		// 	}
+
+		// 	return publicAPI;
+
+		// })('foo module');
+
+		// foo.identify();
+		// foo.change();
+		// foo.identify();
+
+		// for (let i = 1; i < 6; i ++) {
+		// 	setTimeout(function timer() {
+		// 		console.log(i)
+		// 	}, i * 1000)
+		// }
+		// for (var i = 1; i < 6; i ++) {
+		// 	(function(j) {
+		// 		setTimeout(function timer() {
+		// 			console.log(j)
+		// 		}, j * 1000)
+		// 	})(i);
+		// }
+		// function wait(message) {
+		// 	setTimeout(function timer() {
+		// 		console.log(message)
+		// 	}, 1000)
+		// }
+		// wait('Hello wait me!')
+		// function foo() {
+		// 	var a = 2;
+
+		// 	function bar() {
+		// 		console.log(a)
+		// 	}
+
+		// 	return bar;
+		// }
+		// var baz = foo(); // 闭包
+
+		// 闭包
+		// function foo() {
+		// 	var a = 2;
+
+		// 	function baz() {
+		// 		console.log(a)
+		// 	}
+
+		// 	bar(baz)
+		// }
+
+		// function bar(fn) {
+		// 	fn(); // 闭包
+		// }
+
+		// ****************************************************
+
+
 		// foo();
 		// var a = true;
 		// if (a) {
