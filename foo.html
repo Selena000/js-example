@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		// 闭包
+		function foo() {
+			var a = 2;
+
+			function bar() {
+				console.log(a)
+			}
+
+			return bar;
+		}
+		var baz = foo(); // 闭包
+		// foo();
+		// var a = true;
+		// if (a) {
+		// 	function foo() {
+		// 		console.log('a')
+		// 	}
+		// } else {
+		// 	function foo() {
+		// 		console.log('b')
+		// 	}
+		// }
+		// 函数声明和变量声明都会被提升
+		// foo();
+		// var foo;
+		// function foo() {
+		// 	console.log(1)
+		// }
+		// foo = function() {
+		// 	console.log(2)
+		// }
+		// foo();
+		// bar();
+		// var foo = function bar() {
+		// }
+		// var foo;
+		// foo();
+		// bar();
+		// foo = function() {
+		// 	var bar = ...self...
+		// }
+		// 变量提升
+		// a = 2;
+		// var a;
+		// console.log(a)
+		// console.log(d)
+		// var d = 2;
+		// var foo = true, baz = 10;
+		// if (foo) {
+		// 	let bar = 3;
+		// 	if (baz > bar) {
+		// 		console.log(baz)
+		// 	}
+		// }
+		// {
+		// 	let j;
+		// 	for (j = 0; j < 10; j ++) {
+		// 		let i = j; // 每次迭代都重新绑定
+		// 		console.log(i)
+		// 	}
+		// }
+		// function process(data) {
+		// 	// 
+		// }
+		// {
+		// 	var someReallyBigData = {}
+		// 	process(someReallyBigData)
+		// }
+		// var btn = document.getElementById('my-button')
+		// btn.addEventListener('click', function (event) {
+		// 	console.log('button click')
+		// })
+		// var a = 2;
+		// (function IIFE(def) {
+		// 	def(window)
+		// })(function def(global) {
+		// 	var a = 3;
+		// 	console.log(a)
+		// 	console.log(global.a)
+		// })
+
+		// var b = 100;
+		// if (19) {
+		// 	let c = 10;
+		// }
+		// console.log(c)
+		// (function foo() {
+		// 	var a = 3
+		// 	console.log(a)
+		// }());
+		// (function foo() {
+		// 	var a = 3
+		// 	console.log(a)
+		// })();
+		// undefined = true;
+		// (function IIFE(undefined) {
+		// 	var a;
+		// 	if (a === undefined) {
+		// 		console.log('---undefined is safe here')
+		// 	}
+		// })(undefined)
+		// var Libaray = {
+		// 	awesome: 'stuff',
+		// 	doSomething: function() {
+		// 		// 
+		// 	}
+		// }
+		// function doSomething(a) {
+		// 	function doSomethingElse(a) {
+		// 		return a - 1
+		// 	}
+		// 	var b;
+		// 	b = a + doSomethingElse(a * 2)
+		// 	console.log(b * 3)
+		// }
+		
+		// doSomething(2)
+		// function foo(obj) {
+		// 	with (obj) {
+		// 		a = 2;
+		// 	}
+		// }
+
+		// var ol = {
+		// 	b: 3
+		// }
+		// foo(ol)
+		// console.log(ol)
+		// console.log(ol.a) // 泄露到全局作用域
+		// console.log(a)
+
+		// var obj = {
+		// 	a: 1,
+		// 	b: 2, 
+		// 	c: 3
+		// }
+
+		// with (obj) {
+		// 	a = 6
+		// 	b = 6
+		// 	c = 6
+		// }
+
+		// console.log(obj)
+
+
+		// function foo(a) {
+		// 	var b = 10;
+		// 	console.log(a + b)
+		// 	a = b
+		// }	
+		// foo(2)	
+		// // console.log(foo.b)
+		// function foo(str) {
+		// 	'use strict'
+		// 	eval(str)
+		// 	console.log(a)
+		// }
+		// var b = 2
+		// foo('var a = 3')
+		// /**
+			
+		// */
+	</script>
+</body>
+</html>
