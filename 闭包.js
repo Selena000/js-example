@@ -146,3 +146,11 @@ var foo = MyModules.get('foo')
 console.log(bar.hello('hippo'))
 
 foo.awesome();
+
+/*
+	另外：
+		块级作用域：ES6之前是用try catch
+
+
+
+*/
