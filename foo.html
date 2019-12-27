@@ -5,33 +5,89 @@
 </head>
 <body>
 	<script type="text/javascript">
-		// ****************************************************
-		// this
-		var obj = {
-			id: 'awesome',
-			count: 0,
-			cool: function coolFn() {
-				// console.log(this.id)
-				// var self = this;
 
-				// if (self.count < 1) {
-				// 	setTimeout(function timer() {
-				// 		self.count ++;
-				// 		console.log('awesome?', self.id)
-				// 	}, 100)
-				// }
-
-				if (this.count < 1) {
-					setTimeout(function timer() {
-						this.count ++;
-					}.bind(this), 100) //  bind可以改变this的指向
-				}
-			}
+		
+		// **this*********************************************
+		
+		// error
+		function foo() {
+			var a = 2
+			this.bar()
 		}
 
-		var id = 'not awesome'
+		function bar() {
+			console.log(this.a)
+		}
 
-		obj.cool();
+		foo()
+
+		// function foo(num) {
+		// 	console.log('foo: ', num)
+
+		// 	this.count ++
+		// }
+		// foo.count = 0
+
+		// var i;
+		// for (i = 0; i < 10; i++) {
+		// 	if (i > 5) {
+		// 		foo.call(foo, i)
+		// 	}
+		// }
+
+		// console.log(foo.count)
+
+		// function identify() {
+		// 	return this.name.toUpperCase();
+		// }		
+
+		// function speak() {
+		// 	var greeting = 'Hello, I am ' + identify.call(this)
+		// 	console.log(greeting)
+		// }
+
+		// var me = {
+		// 	name: 'Kyle'
+		// }
+
+		// var you = {
+		// 	name: 'Reader'
+		// }
+
+		// identify.call(me)
+		// identify.call(you)
+
+		// speak.call(me)
+		// speak.call(you)
+
+
+
+		// this
+		// var obj = {
+		// 	id: 'awesome',
+		// 	count: 0,
+		// 	cool: function coolFn() {
+		// 		// console.log(this.id)
+		// 		// var self = this;
+
+		// 		// if (self.count < 1) {
+		// 		// 	setTimeout(function timer() {
+		// 		// 		self.count ++;
+		// 		// 		console.log('awesome?', self.id)
+		// 		// 	}, 100)
+		// 		// }
+
+		// 		if (this.count < 1) {
+		// 			setTimeout(function timer() {
+		// 				this.count ++;
+		// 			}.bind(this), 100) //  bind可以改变this的指向
+		// 		}
+		// 	}
+		// }
+
+		// var id = 'not awesome'
+
+		// obj.cool();
 
 		// setTimeout(obj.cool, 100)
 
