@@ -9,6 +9,95 @@
 		
 		// **Object******************************************
 		
+		// 六种主要类型：string number boolean null undefined object
+		// 五种简单基本类型：string number boolean null undefined
+
+		// var strPrimitive = 'I am a string'
+		// console.log(typeof strPrimitive)
+		// console.log(strPrimitive instanceof String)
+
+		// var strObject = new String('I am a String')
+		// console.log(typeof strObject)
+		// console.log(strObject instanceof String)
+
+		// console.log(Object.prototype.toString.call(strObject))
+
+		// var prefix = 'foo'
+
+		// var myObject = {
+		// 	[prefix + 'bar']: 'hello',
+		// 	[prefix + 'baz']: 'world'
+		// }
+
+		// console.log(myObject['foobar'])
+		// console.log(myObject['foobaz'])
+
+		// function anotherFunction() {}
+
+		// var anotherObject = {
+		// 	c: true
+		// }
+
+		// var anotherArray = []
+
+		// var myObject = {
+		// 	a: 2,
+		// 	b: anotherObject,
+		// 	c: anotherArray,
+		// 	d: anotherFunction
+		// }
+
+		// anotherArray.push(anotherObject, myObject)
+
+		// var newObj = Object.assign({}, myObject)
+
+		// debugger
+
+		// debugger
+
+		// var someObj = {
+		// 	a: {
+		// 		b: {
+		// 			c: {
+		// 				d: 10
+		// 			}
+		// 		}
+		// 	}
+		// }
+		// // 深复制
+		// console.log(JSON.parse(JSON.stringify(someObj)))
+		// // 浅复制
+		// console.log(Object.assign({}, someObj))
+
+		// var myObject = {}
+
+		// Object.defineProperty(myObject, 'b', {
+		// 	value: [1, 2],
+		// 	writable: true,
+		// 	configurable: false,
+		// 	enumerable: true
+		// })
+
+		// myObject.b.push(3) // 生效
+
+		// console.log(myObject.b)
+
+		var myObject = {
+			get a() {
+				return 2
+			},
+			set a(val) {
+				this.a = val * 2
+			}
+		}
+
+		Object.defineProperty(myObject, 'b', {
+			get: function() {
+				return this.a * 2
+			},
+			enumerable: true
+		})
+
 		// **this*********************************************
 		
 		/*
@@ -21,6 +110,22 @@
 			4．默认：在严格模式下绑定到undefined，否则绑定到全局对象。
 
 		*/
+
+		// function foo() {
+		// 	console.log(this.a)
+		// }
+
+		// var a = 0
+		// var someFoo = foo
+
+		// var myObject = {
+		// 	a: 1,
+		// 	someFoo: foo
+		// }
+
+		// foo() // 0
+		// someFoo() // 0
+		// myObject.someFoo() // 1
 
 		// function foo() {
 		// 	return a => {
