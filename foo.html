@@ -82,21 +82,118 @@
 
 		// console.log(myObject.b)
 
+		// var myObject = {
+		// 	get a() {
+		// 		return 2
+		// 	},
+		// 	set a(val) {
+		// 		this.a = val * 2
+		// 	}
+		// }
+
+		// Object.defineProperty(myObject, 'b', {
+		// 	get: function() {
+		// 		return this.a * 2
+		// 	},
+		// 	enumerable: true
+		// })
+
+		// console.log('a:::', 'a' in myObject)
+		// console.log('b:::', myObject.hasOwnProperty('b'))
+		// console.log('c:::', myObject.hasOwnProperty('c'))
+
+		// var myObject = {}
+
+		// Object.defineProperty(myObject, 'a', {
+		// 	enumerable: true,
+		// 	value: 2
+		// })
+
+		// Object.defineProperty(myObject, 'b', {
+		// 	enumerable: false,
+		// 	value: 3
+		// })
+
+		// console.log('myObject.b', myObject.b)
+		// console.log('b in myObject', 'b' in myObject)
+		// console.log('myObject.hasOwnProperty(b)', myObject.hasOwnProperty('b'))
+
+		// for (var k in myObject) {
+		// 	console.log('k: ', k, 'myObject[k]:', myObject[k])
+		// }
+
+		// console.log('myObject.propertyIsEnumerable(a)',myObject.propertyIsEnumerable('a'))
+		// console.log('myObject.propertyIsEnumerable(b)', myObject.propertyIsEnumerable('b'))
+
+		// console.log('Object.keys(myObject)', Object.keys(myObject))
+		// console.log('Object.getOwnPropertyNames(myObject)', Object.getOwnPropertyNames(myObject))
+
+		/*
+			enumerable为false时：
+				1.object.a可访问
+				2.in可访问
+				3.object.hasProperty可访问
+				4.Object.getOwnPropertyNames(object)可访问
+				
+				5.object.propertyIsEnumerable为false
+
+				6.for in 不可访问
+				7.Object.keys(object)不可访问
+				8.Object.getOwnPropertyNames(object)可访问
+
+		*/
+
+		// let myArray = [1, 2, 3]
+
+		// for (var v of myArray) {
+		// 	console.log(v)
+		// }
+
+		// var it = myArray[Symbol.iterator]();
+
+		// console.log('it.next()', it.next())
+		// console.log('it.next()', it.next())
+		// console.log('it.next()', it.next())
+		// console.log('it.next()', it.next())
+		// console.log('it.next()', it.next())
+		// console.log('it.next()', it.next())
+		// console.log('it.next()', it.next())
+
+		// 手动添加迭代器
 		var myObject = {
-			get a() {
-				return 2
-			},
-			set a(val) {
-				this.a = val * 2
-			}
+			a: 2,
+			b: 3
 		}
 
-		Object.defineProperty(myObject, 'b', {
-			get: function() {
-				return this.a * 2
-			},
-			enumerable: true
+		Object.defineProperty(myObject, Symbol.iterator, {
+			enumerable: false,
+			writable: false,
+			configurable: true,
+			value: function() {
+				var o = this;
+				var idx = 0;
+				var ks = Object.keys(o)
+
+				return {
+					next: function() {
+						return {
+							value: o[ks[idx++]],
+							done: (idx > ks.length)
+						}
+					}
+				}
+			}
 		})
+
+		var it = myObject[Symbol.iterator]()
+
+		console.log('it.next', it.next())
+		console.log('it.next', it.next())
+		console.log('it.next', it.next())
+
+		for (var v of myObject) {
+			console.log(v)
+		}
 
 		// **this*********************************************
 		
