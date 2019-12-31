@@ -7,7 +7,19 @@
 	<script type="text/javascript">
 
 		
-		// **Prototype***************************************
+		// **委托********************************
+		function Foo() {}
+
+		var a1 = new Foo()
+
+		Foo.prototype.constructor = function Gotcha() {}
+
+		console.log('a1.constructor', a1.constructor)
+		console.log('a1.constructor.name', a1.constructor.name)
+		console.log('a1', a1)
+
+
+		// **Prototype***************************
 		
 		// var anotherObject = {
 		// 	cool: function() {
