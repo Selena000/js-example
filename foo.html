@@ -7,6 +7,195 @@
 	<script type="text/javascript">
 
 		
+		// **Prototype***************************************
+		
+		// var anotherObject = {
+		// 	cool: function() {
+		// 		console.log('Cool!')
+		// 	}
+		// }
+
+		// var myObject = Object.create(anotherObject)
+
+		// myObject.doCool = function() {
+		// 	this.cool() // 内部委托
+		// }
+
+		// myObject.doCool() 
+
+		// Object.create
+		// var foo = {
+		// 	something: function() {
+		// 		console.log('Tell me something good...')
+		// 	}
+		// }
+
+		// var bar = Object.create(foo)
+
+		// bar.something()
+
+		//  polyfill 手动实现Object.create()方法
+		// if (!Object.create) {
+		// 	Object.create = function(o) {
+		// 		function F() {}
+		// 		F.prototype = o
+
+		// 		return new F()
+		// 	}
+		// }
+
+		// var anotherObject = {
+		// 	a: 2
+		// }
+
+		// var myObject = Object.create(anotherObject, {
+		// 	b: {
+		// 		enumerable: false,
+		// 		writable: true,
+		// 		configurable: false,
+		// 		value: 3
+		// 	},
+		// 	c: {
+		// 		enumerable: true,
+		// 		writable: false,
+		// 		configurable: false,
+		// 		value: 4
+		// 	}
+		// })
+
+		// console.log('myObject.hasOwnProperty(a)', myObject.hasOwnProperty('a'))
+		// console.log('myObject.hasOwnProperty(b)', myObject.hasOwnProperty('b'))
+		// console.log('myObject.hasOwnProperty(c)', myObject.hasOwnProperty('c'))
+
+		// console.log('myObject.a', myObject.a)
+		// console.log('myObject.b', myObject.b)
+
+		/*
+			方法/属性
+				Object.create(Foo.prototype)
+				Object.setPrototypeOf(Bar.prototype, Foo.prototyep)
+				Object.getPrototypeOf(a)
+				a instanceof Bar
+				Bar.prototype.isPrototypeOf(a)
+				b.isPrototypeOf(c)
+				非标准：a.__proto__ === Foo.prototype
+		*/
+
+		// .__proto__的实现
+		// Object.defineProperty(Object.prototype, '__proto__', {
+		// 	get: function() {
+		// 		return Object.getPrototypeOf(this)
+		// 	},
+		// 	set: function(o) {
+		// 		Object.setPrototypeOf(this, o)
+		// 		return o
+		// 	} 
+		// })
+
+		// function isRelatedTo(o1, o2) {
+		// 	function F() {}
+		// 	F.prototype = o2
+		// 	return o1 instanceof F
+		// }
+
+		// var a = {}
+		// var b = Object.create(a)
+
+		// console.log('isRelatedTo(b, a)', isRelatedTo(b, a))
+
+
+		// 原型风格
+		// function Foo(name) {
+		// 	this.name = name
+		// }
+
+		// Foo.prototype.myName = function() {
+		// 	return this.name
+		// }
+
+		// function Bar(name, label) {
+		// 	Foo.call(this, name)
+
+		// 	this.label = label
+		// }
+		// 凭空创建一个新对象，并把新对象内部的prototype关联到指定的对象中
+		// Bar.prototype = Object.create(Foo.prototype)
+		// ES6
+		// Object.setPrototypeOf(Bar.prototype, Foo.prototype)
+
+		// Bar.prototype.myLabel = function() {
+		// 	return this.label
+		// }
+
+		// var a = new Bar('a', 'obj a')
+
+		// console.log('a.myName()', a.myName())
+		// console.log('a.myLabel()', a.myLabel())
+
+		// console.log(a.constructor)
+
+		// instanceof:只能处理对象（a）和函数（带．prototype引用的Bar）之间的关系，判断不了是否通过【【Prototype】】链关联
+		// console.log(a instanceof Bar)
+		// console.log(Bar.prototype.isPrototypeOf(a))
+
+		// function Foo() {
+		// 	// 
+		// }
+
+		// var a = new Foo()
+
+		// console.log(Object.getPrototypeOf(a) === Foo.prototype)
+		// console.log(a.constructor === Foo)
+
+		// console.log('Foo.prototype.constructor === Foo', Foo.prototype.constructor === Foo)
+
+
+		// var anotherObject = {
+		// 	a: 2
+		// }
+
+		// var myObject = Object.create(anotherObject)
+
+		// console.log(anotherObject.a)
+		// console.log(myObject.a)
+
+		// console.log('anotherObject.hasOwnProperty(a)', anotherObject.hasOwnProperty('a'))
+		// console.log('myObject.hasOwnProperty(a)', myObject.hasOwnProperty('a'))
+
+		// myObject.a ++; // 隐式屏蔽
+
+		// console.log('anotherObject.a', anotherObject.a)
+		// console.log('myObject.a', myObject.a)
+
+		// console.log(myObject.hasOwnProperty('a'))
+
+
+		// **Class******************************************
+		
+		// 1
+
+		// class CoolGuy {
+
+		//   specialTrick = 'noting'
+
+		// 	CoolGuy(trick) {
+		// 		this.specialTrick = trick
+		// 	}
+
+		// 	showOff() {
+		// 		console.log('Here\'s my trick:', specialTrick )
+		// 	}
+		// }
+
+		// class Car inherits Vehicle {
+
+		// }
+
+		// let Joe = new CoolGuy('jumping rope')
+
+		// Joe.showOff()
+
+
 		// **Object******************************************
 		
 		// 六种主要类型：string number boolean null undefined object
@@ -160,40 +349,40 @@
 		// console.log('it.next()', it.next())
 
 		// 手动添加迭代器
-		var myObject = {
-			a: 2,
-			b: 3
-		}
+		// var myObject = {
+		// 	a: 2,
+		// 	b: 3
+		// }
 
-		Object.defineProperty(myObject, Symbol.iterator, {
-			enumerable: false,
-			writable: false,
-			configurable: true,
-			value: function() {
-				var o = this;
-				var idx = 0;
-				var ks = Object.keys(o)
+		// Object.defineProperty(myObject, Symbol.iterator, {
+		// 	enumerable: false,
+		// 	writable: false,
+		// 	configurable: true,
+		// 	value: function() {
+		// 		var o = this;
+		// 		var idx = 0;
+		// 		var ks = Object.keys(o)
 
-				return {
-					next: function() {
-						return {
-							value: o[ks[idx++]],
-							done: (idx > ks.length)
-						}
-					}
-				}
-			}
-		})
+		// 		return {
+		// 			next: function() {
+		// 				return {
+		// 					value: o[ks[idx++]],
+		// 					done: (idx > ks.length)
+		// 				}
+		// 			}
+		// 		}
+		// 	}
+		// })
 
-		var it = myObject[Symbol.iterator]()
+		// var it = myObject[Symbol.iterator]()
 
-		console.log('it.next', it.next())
-		console.log('it.next', it.next())
-		console.log('it.next', it.next())
+		// console.log('it.next', it.next())
+		// console.log('it.next', it.next())
+		// console.log('it.next', it.next())
 
-		for (var v of myObject) {
-			console.log(v)
-		}
+		// for (var v of myObject) {
+		// 	console.log(v)
+		// }
 
 		// **this*********************************************
 		
