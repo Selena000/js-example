@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		//***类型*******************************************
+		/* 
+			七大内置类型
+				null
+				undefined
+				boolean
+				number
+				string
+				object 除对象之外，其他统称为“基本类型”
+				symbol
+		*/
+
+		// console.log(typeof null) // object
+
+		// var a = null
+		// console.log(!a && typeof a === 'object') // true
+		/* 
+			1.正确的返回结果应该是"null"，但这个bug由来已久，在JavaScript中已经存在了将近二十年，也许永远也不会修复
+			2.null是“假值” 也是唯一一个用typeof检测会返回"object"的基本类型值。
+		*/
+
+		// typeof function a() {} // function
+
+		// function doSomethingCool() {
+		// 	var helper = (typeof FeatureXYZ !== 'undefined' ?
+		// 		FeatureXYZ: 
+		// 		function() {})
+
+		// 	var val = helper()
+		// }
+		// 数组
+		/*
+			类数组转数组：
+				1.Array.prototype.slice.call(arguments)
+				2.Array.from(arguments)
+		*/
+		function foo() {
+			var arr = Array.prototype.slice.call(arguments)
+
+			arr.push('bam')
+
+			console.log(arr)
+		}
+
+		foo('a', 'b')
+
+		//*************************************************
+	</script>
+</body>
+</html>
