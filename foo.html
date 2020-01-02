@@ -8,6 +8,23 @@
 
 		
 		// **委托********************************
+		// 内省 instanceof
+		function Foo() {
+			// 
+		}
+
+		Foo.prototype.something = function() {
+			//
+		}
+
+		var a1 = new Foo()
+
+		if (a1 instanceof Foo) {
+			a1.something()
+		}
+		// 鸭子类型
+		a1.something && a1.something()
+
 		// prototype机制
 		// function Widget(width, height) {
 		// 	this.width = width || 50
