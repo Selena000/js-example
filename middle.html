@@ -41,15 +41,176 @@
 				1.Array.prototype.slice.call(arguments)
 				2.Array.from(arguments)
 		*/
-		function foo() {
-			var arr = Array.prototype.slice.call(arguments)
+		// function foo() {
+		// 	var arr = Array.prototype.slice.call(arguments)
 
-			arr.push('bam')
+		// 	arr.push('bam')
 
-			console.log(arr)
+		// 	console.log(arr)
+		// }
+
+		// foo('a', 'b')
+
+		// 字符串
+		// var a = 'foo'
+		// var b = ['f', 'o', 'o']
+
+		// console.log(a.concat('bar'))
+
+		// var c = Array.prototype.join.call(a, '-')
+		// var d = Array.prototype.map.call(a, function(v) {
+		// 	return v.toUpperCase() + '.'
+		// }).join('')
+
+		// console.log('c', c)
+		// console.log('d', d)
+
+		// // reverse
+		// var e = a.split('').reverse().join('')
+		// console.log('e', e)
+
+		// // 数字
+		// var f = 5E10
+		// console.log('f', f.toExponential())
+
+		// // 不过对于．运算符需要给予特别注意，因为它是一个有效的数字字符，会被优先识别为数字字面量的一部分，然后才是对象属性访问运算符。
+		// var g = 42.59
+		// console.log(g.toFixed(0))
+		// console.log(g.toFixed(2));
+
+		// // 42.toFixed(3) // 无效
+		// (32).toFixed(0) // 有效
+		// 0.32.toFixed(0) // 有效
+		// 32..toFixed(0) // 有效
+		// 32 .toFixed(9) // 有效
+
+		// // 精度问题 - 机器精度
+		// if (!Number.EPSILON) { // ES6支持
+		// 	Number.EPSILON = Math.pow(2, -52)
+		// }
+
+		// function numbersCloseEnoughToEqual(n1, n2) {
+		// 	return Math.abs(n1 - n2) < Number.EPSILON
+		// }
+
+		// var a = 0.1 + 0.2
+		// var b = 0.3
+
+		// console.log(numbersCloseEnoughToEqual(a, b))
+		// console.log(numbersCloseEnoughToEqual(0.0000001, 0.0000002))
+		/*
+			Number.MAXVALUE
+			Number.MINVALUE
+
+			Number.MAXSAFEINTEGER
+			
+			整数的检测
+				Number.isInteger()
+				Number.isSafeInteger()
+		*/
+		// console.log(Number.isInteger(343.000)) // true
+ 	// 	console.log(Number.isInteger(343.003)) // false
+ 	// 	// polyfill
+ 	// 	if (!Number.isInteger) {
+ 	// 		Number.isInteger = function(num) {
+ 	// 			return typeof num == 'number' && num % 1 == 0
+ 	// 		}
+ 	// 	}
+
+ 	// 	if (!Number.isSafeInteger) {
+ 	// 		Number.isSafeInteger = function(num) {
+ 	// 			return Number.isInteger(num) && Math.abs(num) <= Number.MAXSAFEINTEGER
+ 	// 		}
+ 	// 	}
+
+ 		/*
+			undefined类型只有一个值，即undefined。
+			null类型也只有一个值，即null。
+			它们的名称既是类型也是值。
+
+			undefined
+				1.永远不要重新定义undefined。
+
+			void 
+				1.void______没有返回值，因此返回结果是undefined
+ 		*/
+
+ 		/* 
+ 			NaN  
+ 				1.执行数学运算没有成功，这是失败后返回的结果”
+ 				2.不要使用window.isNaN，用Number.isNaN
+				3.NaN是JavaScript中唯一一个不等于自身的值。
+		*/
+
+		// window.isNaN('foo') // true !!!!居然是true
+
+		// // polyfill Number.isNaN
+		// if (!Number.isNaN) {
+		// 	// Number.isNaN = function(n) {
+		// 	// 	return typeof n === 'number' && window.isNaN(n)
+		// 	// }
+		// 	Number.isNaN = function(n) {
+		// 		// NaN是JavaScript中唯一一个不等于自身的值。
+		// 		return n !== n
+		// 	}
+		// }
+
+		// Number.isNaN('foo') // false
+		
+
+		// // 负零
+		// /*
+		// 	作用：有些应用程序中的数据需要以级数形式来表示（比如动画帧的移动速度），数字的符号位（sign）用来代表其他信息（比如移动的方向）。此时如果一个值为0的变量失去了它的符号位，它的方向信息就会丢失。所以保留0值的符号位可以防止这类情况发生。
+		// */
+		// function isNegZero(n) {
+		// 	n = Number(n)
+		// 	return (n === 0) && (1 / n === -Infinity)
+		// }
+
+		// console.log(isNegZero(-0))
+		// console.log(isNegZero(0 / -3))
+		// console.log(isNegZero(0))
+
+		// // Object.is() 判断两个值是否绝对相等
+
+		// console.log(Object.is(2 / 'foo', NaN))
+		// console.log(Object.is(-0, 0))
+		// console.log(Object.is(-0, -0))
+		
+		// // polyfill
+		// if (!Object.is) {
+		// 	Object.is = function(v1, v2) {
+		// 		if (v1 === v2 && v2 === 0) { // 判断-0
+		// 			return 1 / v1 === 1/ v2
+		// 		}
+		// 		if (v1 !== v1) { // 判断NaN
+		// 			return v2 !== v2
+		// 		}
+		// 		return v1 === v2 // 其他
+		// 	}
+		// }
+
+		// 值
+		// 引用
+		function foo(x) {
+			x.push(4)
+			console.log(x)
+
+			// x = [4, 5, 6]
+			// x.push(7)
+			// console.log(x)
+
+			x.length = 0
+			x.push(4, 5,6, 7)
+			console.log(x)
+			console.log(x.length)
 		}
 
-		foo('a', 'b')
+		var a = [1, 2, 3]
+		foo(a)
+
+		console.log(a) // [1, 2, 3, 4]
+
 
 		//*************************************************
 	</script>
