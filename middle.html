@@ -5,7 +5,389 @@
 </head>
 <body>
 	<script type="text/javascript">
-		//***类型*******************************************
+		//***语法*****************************************
+		/*
+			代码块：
+				[] + {}; // [object Object]
+				{} + []; // 0
+			
+			先执行 && 再执行||，最后是? :
+		*/
+
+		// var a = 42
+		// var b = 'foo'
+		// var c = false
+
+		// var d = a && b || c ? c || b ? a : c && b : a // 42
+
+		function foo() {
+			try {
+				return 42
+			}
+			finally {
+				console.log('Hello')
+			}
+
+			console.log('never runs.')
+		}
+
+		console.log(foo())
+
+
+		// foo: for (var i = 0; i < 4; i ++) {
+		// 	for (var j = 0; j < 4; j ++) {
+		// 		if (j == i) {
+		// 			continue foo
+		// 		}
+
+		// 		if ((j * i) % 2 == 1) {
+		// 			continue
+		// 		}
+
+		// 		console.log(i, j)
+		// 	}
+		// }
+
+		// console.log('**************')
+
+		// bar: for (var i = 0; i < 4; i ++) {
+		// 	for (var j = 0; j < 4; j ++) {
+		// 		if ((i * j) >= 3) {
+		// 			console.log('stopping!', i, j)
+		// 			break bar
+		// 		}
+		// 		console.log(i, j)
+		// 	}
+		// }
+		
+
+		// function vowels(str) {
+		// 	var matches
+
+		// 	if (str && (matches = str.match(/[aeiou]/g))) {
+		// 		return matches
+		// 	}
+		// }
+
+		// console.log(vowels('Hello world...'))
+
+
+		//***强制类型转换**********************************
+		// var a = 1.07 * 1000 * 1000 * 1000 * 1000 * 1000 * 1000 * 1000 * 1000
+
+		// console.log(a.toString())
+
+		// var o = {}
+
+		// var b = {
+		// 	c: 42,
+		// 	d: o,
+		// 	d: function() {}
+		// }
+
+		// o.e = b
+
+		// console.log(JSON.stringify(o))
+		// b.toJSON = function() {
+		// 	return { c: this.c }
+		// }
+
+		// console.log(JSON.stringify(b))
+
+		// JSON.stringify
+		// var a = {
+		// 	b: 42,
+		// 	c: '42',
+		// 	d: [1, 2, 3]
+		// }
+
+		// console.log('JSON.stringify(a, [b, c])', JSON.stringify(a, ['b', 'c']))
+
+		// var helperFn = JSON.stringify(a, function(k, v) {
+		// 	if (k !== 'c') {
+		// 		return v
+		// 	}
+		// }, '****')
+
+		// console.log('helperFn', helperFn)
+
+		/*
+			ToNumber:
+				1.调用valueOf
+				2.调用toString
+		
+			ToBoolean:
+				1.假值：undefined null false +0 -0 NaN ''
+				2.假值对象
+					var a = new Boolean(false) // true
+					var b = New Number(0) // true
+					var c = new String('') // true
+				3.真值
+
+			a + '' 和String(a)的区别：
+				1.a + ''：先调用valueOf，在调用ToString
+				2.String(a)：直接调用ToString
+
+
+		*/
+
+		// var a = {
+		// 	valueOf: function() { return 42 },
+		// 	toString: function() { return 4 }
+		// }
+
+		// var a = 42
+		// var b = '42'
+		// // 因为没有强制类型转换，所以a === b为false
+		// console.log(a === b)
+		// console.log(a == b)
+
+		// var a = '42'
+		// var b = true
+
+		// console.log(a == b)
+
+		// var x = '42'
+		// var y = false
+
+		// console.log(x == y)
+
+		// Number.prototype.valueOf = function() {
+		// 	return 3
+		// }
+
+		// console.log(new Number(2) == 3)
+
+		// var i = 2
+
+		// Number.prototype.valueOf = function() {
+		// 	return i ++
+		// }
+
+		// var a = new Number(42)
+
+		// if (a == 2 && a == 3) {
+		// 	console.log('Hppened.....')
+		// }
+
+		/*
+			x : number
+			y : string
+				x == ToNumber(y)
+
+			x: string
+			y: number
+				ToNumber(x) == y
+
+			x: boolean
+				ToNumber(x) == y
+			y: boolean
+				x == ToNumber(y)
+
+			x: string/number
+			y: object
+				x == ToPrimitive(y)
+
+			x: object
+			y: string/number
+				ToPrimitive(x) == y
+		
+		*/
+
+		// 一些比较
+
+		// console.log('0' == null)
+		// console.log('0' == undefined)
+		// console.log('0' == false)
+		// console.log('0' == NaN)
+		// console.log('0' == 0)
+		// console.log('0' == '')
+
+		// console.log(false == null)
+		// console.log(false == undefined)
+		// console.log(false == NaN)
+		// console.log(false == 0)
+		// console.log(false == '')
+		// console.log(false == [])
+		// console.log(false == {})
+
+		// console.log('' == null)
+		// console.log('' == undefined)
+		// console.log('' == NaN)
+		// console.log('' == 0)
+		// console.log('' == []) // 
+		// console.log('' == {})
+
+		// var a = { b: 42 }
+		// var b = { b: 43 }
+
+		// console.log(a < b)
+		// console.log(a == b)
+		// console.log(a > b)
+
+		// console.log(a <= b) // true
+		// console.log(a >= b) // true
+
+
+
+
+		// function onlyOne() {
+		// 	var sum = 0
+		// 	for (var i = 0; i < arguments.length; i ++) {
+		// 		if (arguments[i]) {
+		// 			sum += arguments[i]
+		// 		}
+		// 	}
+
+		// 	return sum === 1
+		// }
+
+		// console.log(+new Date())
+
+		// // polyfill : Date.now()
+		// if (!Date.now) {
+		// 	Date.now = function() {
+		// 		return +new Date()
+		// 	}
+		// }
+
+
+		// console.log(parseInt(1/0, 19))
+
+		// console.log(parseInt(0.0008))
+		// console.log(parseInt(0.000000008)) // 8e-9
+		// console.log(parseInt(false, 16))
+		// console.log(parseInt(parseInt, 16))
+		// console.log(parseInt('0x10'))
+		// console.log(parseInt('103', 2))
+		// var a = [1, 2]
+		// var b = [3, 4]
+
+		// console.log(a + b)
+
+		// var a = {
+		// 	valueOf: function() {
+		// 		return '42'
+		// 	}
+		// }
+
+		// var b = {
+		// 	toString: function() {
+		// 		return '42'
+		// 	}
+		// }
+
+		// var c = [4, 2]
+		// c.toString = function() {
+		// 	return this.join('')
+		// }
+
+		// console.log(Number(a))
+		// console.log(Number(b))
+		// console.log(Number(c))
+		// console.log(Number(''))
+		// console.log(Number([]))
+		// console.log(Number(['a, b, c']))
+
+
+		//***原生函数*************************************
+		// 通过构造函数（如new String("abc")）创建出来的是封装了基本类型值（如"abc"）的封装对象。
+		// var a = new String('abc')
+
+		// console.log(typeof a) // object
+		// console.log(a instanceof String) // true
+		// console.log(Object.prototype.toString.call(a)) // [object String]
+		// var a = new Boolean(false)
+		// // 我们为false创建了一个封装对象，然而该对象是真值
+		// if (!a) {
+		// 	console.log('boolean')
+		// }
+
+		// 如果想要自行封装基本类型值，可以使用Object(..)函数
+		// var a = 'abc'
+		// var b = new String(a)
+		// var c = Object(a)
+
+		// console.log(typeof a)
+		// console.log(typeof b)
+		// console.log(typeof c)
+
+		// console.log(b instanceof String)
+		// console.log(c instanceof String)
+
+		// console.log(Object.prototype.toString.call(b))
+		// console.log(Object.prototype.toString.call(c))
+
+		// var a = new String('abc')
+		// var b = new Number(42)
+		// var c = new Boolean(true)
+
+		// console.log(a.valueOf())
+		// console.log(b.valueOf())
+		// console.log(c.valueOf())
+
+		// // 第二个参数则必须是一个数组（或者类似数组的值，也叫作类数组对象，array-like object） 
+		// var d = Array.apply(null, {length: 3})
+
+		// console.log(a) // [undefined, undefined, undefined]
+
+		// var c = new Object()
+		// c.foo = 'bar'
+
+		// var d = {foo: 'bar'}
+
+		// var e = new Function('a', 'return a * 2')
+
+		// var f = function(a) { return a * 2 }
+
+		// function g(a) { return a* 2 }
+
+		// var h = new RegExp('^a*b+', 'g')
+		// var i = /^a*b+/g;
+
+		/*
+
+				1.RegExp(..)有时还是很有用的，比如动态定义正则表达式时 new RegExp("pattern","flags")
+				2.不要把Function(..)当作eval(..)的替代品，你基本上不会通过这种方式来定义函数。
+				3.a.valueOf()
+				4.Date.now()
+				5.Symbol
+	
+		*/
+
+		// var name = 'Kyle'
+		// var namePattern = new RegExp('\\b(?:)' + name + '\\b', 'ig')
+		// var matches = someText.match(namePattern)
+
+		// function foo(x) {
+		// 	if (!x) {
+		// 		throw new Error('x not provided')
+		// 	}
+		// }
+
+		// var mysym = Symbol('my own symbol')
+
+		// console.log('mysym', mysym)
+		// console.log(typeof mysym)
+
+		// var a = {}
+
+		// a[mysym] = 'foobar'
+		// console.log('Object.getOwnPropertySymbols(a)', Object.getOwnPropertySymbols(a))
+
+		// function isThisCool(vals, fn, rx) {
+		// 	vals = vals || Array.prototype;
+		// 	fn = fn || Function.prototype;
+		// 	rx = rx || RegExp.prototype;
+
+		// 	return rx.test(vals.map(fn).join(''))
+		// }
+
+		// isThisCool(); // true
+		// isThisCool(['a', 'b', 'c'], function(v) { return v.toUpperCase();}, /D/); // false
+
+
+		//***类型*****************************************
 		/* 
 			七大内置类型
 				null
@@ -192,24 +574,24 @@
 
 		// 值
 		// 引用
-		function foo(x) {
-			x.push(4)
-			console.log(x)
+		// function foo(x) {
+		// 	x.push(4)
+		// 	console.log(x)
 
-			// x = [4, 5, 6]
-			// x.push(7)
-			// console.log(x)
+		// 	// x = [4, 5, 6]
+		// 	// x.push(7)
+		// 	// console.log(x)
 
-			x.length = 0
-			x.push(4, 5,6, 7)
-			console.log(x)
-			console.log(x.length)
-		}
+		// 	x.length = 0
+		// 	x.push(4, 5,6, 7)
+		// 	console.log(x)
+		// 	console.log(x.length)
+		// }
 
-		var a = [1, 2, 3]
-		foo(a)
+		// var a = [1, 2, 3]
+		// foo(a)
 
-		console.log(a) // [1, 2, 3, 4]
+		// console.log(a) // [1, 2, 3, 4]
 
 
 		//*************************************************
