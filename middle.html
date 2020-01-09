@@ -6,7 +6,86 @@
 <body>
 	<script type="text/javascript">
 		//***语法*****************************************
-		/*
+    function foo(x) {
+      return listener
+    }
+
+    var evt = foo(42)
+
+    evt.on('completion', function() {
+
+    })
+
+    evt.on('failure', function(err) {
+      
+    })
+		// function add(xPromise, yPromise) {
+  //     return Promise.all([xPromise, yPromise]).then(function(values) {
+  //       return values[0] + values[1]
+  //     })
+  //   }
+
+  //   add(fetchX(), fetchY()).then(function(sum) {
+  //     console.log(sum)
+  //   }, function(err) {
+  //     console.error(err)
+  //   })
+    // function add(getX, getY, cb) {
+  //     var x, y
+
+  //     getX(function(xVal) {
+  //       x = xVal
+
+  //       if (y != undefined) {
+  //         cb(x + y)
+  //       }
+  //     })
+
+  //     getY(function(yVal) {
+  //       y = yVal
+
+  //       if (x != undefined) {
+  //         cb(x + y)
+  //       }
+  //     })
+  //   }
+
+  //   add(fetchX, fetchY, function(sum) {
+  //     console.log(sum)
+  //   })
+    // function asyncify(fn) {
+  //     var origFn = fn
+  //     var intv = setTimeout(function() {
+  //       intv = null
+  //       if (fn)
+  //         fn()
+  //     }, 0)
+
+  //     fn = null
+
+  //     return function() {
+  //       if (intv) {
+  //         fn = origFn.bind.apply(
+  //             origFn,
+  //             [this].concat([].slice.call(arguments))
+  //           )
+  //       } else {
+  //         origFn.apply(this, arguments)
+  //       }
+  //     }
+  //   }
+
+  //   function result(data) {
+  //     console.log(a)
+  //   }
+
+  //   var a = 0
+
+  //   ajax('../pre/url', asyncify(result))
+
+  //   a ++;
+
+    /*
 			代码块：
 				[] + {}; // [object Object]
 				{} + []; // 0
@@ -20,18 +99,18 @@
 
 		// var d = a && b || c ? c || b ? a : c && b : a // 42
 
-		function foo() {
-			try {
-				return 42
-			}
-			finally {
-				console.log('Hello')
-			}
+		// function foo() {
+		// 	try {
+		// 		return 42
+		// 	}
+		// 	finally {
+		// 		console.log('Hello')
+		// 	}
 
-			console.log('never runs.')
-		}
+		// 	console.log('never runs.')
+		// }
 
-		console.log(foo())
+		// console.log(foo())
 
 
 		// foo: for (var i = 0; i < 4; i ++) {
